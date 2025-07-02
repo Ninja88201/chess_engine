@@ -1,4 +1,4 @@
-use chess_lib::{piece, Board, Piece};
+use chess_lib::{Board, Piece};
 
 pub mod consts;
 pub use consts::{CHECKMATE_SCORE, PAWN_VALUE, KNIGHT_VALUE, BISHOP_VALUE, ROOK_VALUE, QUEEN_VALUE};

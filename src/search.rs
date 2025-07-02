@@ -19,7 +19,7 @@ pub fn search(board: &mut Board, depth: i32, mut alpha: i32, beta: i32) -> i32 {
 
     if moves.len() == 0 {
         if board.is_in_check(board.white_turn) {
-            return consts::CHECKMATE_SCORE + depth;
+            return consts::CHECKMATE_SCORE - depth;
         } else {
             return 0;
         }
