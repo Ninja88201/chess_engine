@@ -1,6 +1,8 @@
-use chess_lib::{Board, Piece};
+use chess_lib::{piece, Board, Piece};
 
-mod piece_values;
+pub mod consts;
+pub use consts::{CHECKMATE_SCORE, PAWN_VALUE, KNIGHT_VALUE, BISHOP_VALUE, ROOK_VALUE, QUEEN_VALUE};
+pub mod helper;
 
 pub fn evaluate(board: &Board) -> i32 {
     let white_val = material_eval(board, true);
@@ -11,10 +13,10 @@ pub fn evaluate(board: &Board) -> i32 {
 pub fn material_eval(board: &Board, white: bool) -> i32 {
     let mut eval = 0;
     let (player, _) = board.get_players(white);
-    eval += player.bb[Piece::Pawn as usize].count_ones() as i32 * piece_values::pawnValue;
-    eval += player.bb[Piece::Knight as usize].count_ones() as i32 * piece_values::knightValue;
-    eval += player.bb[Piece::Bishop as usize].count_ones() as i32 * piece_values::bishopValue;
-    eval += player.bb[Piece::Rook as usize].count_ones() as i32 * piece_values::rookValue;
-    eval += player.bb[Piece::Queen as usize].count_ones() as i32 * piece_values::queenValue;
+    let pieces = Piece::ALL_PIECES.iter().filter(|&&p| p != Piece::King);
+    for &piece in pieces {
+        eval += player.bb[piece as usize].count_ones() as i32 * helper::piece_value(piece);
+    }
+
     eval
 }
