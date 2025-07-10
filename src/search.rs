@@ -1,6 +1,6 @@
 use std::i32;
 
-use chess_lib::{Board, Move, MoveList, Piece};
+use chess_lib::{Board, Colour, Move, MoveList, Piece};
 use crate::evaluation::{consts, evaluate};
 use crate::evaluation::helper;
 use crate::transposition::{TTEntry, TTFlag, TranspositionTable};
@@ -139,7 +139,11 @@ fn score_move(mv: Move) -> i32 {
     0
 }
 fn quiescence(board: &mut Board, mut alpha: i32, beta: i32) -> i32 {
-    let eval = evaluate(board);
+    let mut eval = evaluate(board);
+    if board.turn == Colour::Black {
+        eval = -eval;
+    }
+
     if eval >= beta {
         return beta;
     }
