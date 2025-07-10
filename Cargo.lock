@@ -12,4 +12,4 @@ dependencies = [
 [[package]]
 name = "chess_lib"
 version = "0.1.0"
-source = "git+https://github.com/Ninja88201/chess_lib.git#8ec3c53540ec579db620dcbfa0036bccdc4eb011"
+source = "git+https://github.com/Ninja88201/chess_lib.git#604399346ef497dd855458cb1f4acdf6082352e1"
