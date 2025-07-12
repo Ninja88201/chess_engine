@@ -59,11 +59,16 @@ fn game_phase(board: &Board) -> i32 {
         phase += player.bb[Piece::Queen as usize].count_ones() * 4;
     }
 
-    phase.min(16) as i32
+    let max_phase = 24;
+
+    let normalized_phase = (phase.min(max_phase) * 16 / max_phase) as i32;
+    normalized_phase
 }
+
 fn blend_king_ptt(early: i32, end: i32, phase: i32) -> i32 {
-    let early_weight = phase;
-    let end_weight = 16 - phase;
+    let adjusted_phase = phase.max(8);
+    let early_weight = adjusted_phase;
+    let end_weight = 16 - adjusted_phase;
     (early * early_weight + end * end_weight) / 16
 }
 pub fn piece_value(piece: Piece) -> i32 {
