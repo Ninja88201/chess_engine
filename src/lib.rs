@@ -13,7 +13,7 @@ mod tests
     fn test_1() {
         let mut board = Board::new_from_fen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w - - 0 1").unwrap();
         let _ = board.try_move_piece(Tile::E2, Tile::A6, None);
-        let best = find_best_move(&mut board, 5);
+        let best = find_best_move(&mut board, 10);
 
         if let Some(m) = best {
             println!("Best move: {}{}", m.from(), m.to());
