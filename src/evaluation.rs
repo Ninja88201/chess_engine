@@ -1,4 +1,4 @@
-use chess_lib::{Board, Colour, Piece, Tile};
+use chess_lib::{Board, Colour, Piece};
 
 pub mod consts;
 pub use consts::{CHECKMATE_SCORE, PAWN_VALUE, KNIGHT_VALUE, BISHOP_VALUE, ROOK_VALUE, QUEEN_VALUE};
@@ -26,7 +26,7 @@ pub fn player_evaluation(board: &Board, colour: Colour) -> i32 {
             // Piece Tile Tables
             let ptt_index = match colour {
                 Colour::White => tile.to_usize(),
-                Colour::Black => mirror_tile(tile).to_usize(),
+                Colour::Black => tile.mirror_tile().to_usize(),
             };
 
             let ptt_val = match piece {
@@ -80,9 +80,4 @@ pub fn piece_value(piece: Piece) -> i32 {
         Piece::Queen => QUEEN_VALUE,
         Piece::King => 0,
     }
-}
-pub fn mirror_tile(tile: Tile) -> Tile {
-    let index = tile.to_u8();
-    let mirrored_index = index ^ 56;
-    Tile::new_unchecked(mirrored_index)
 }
